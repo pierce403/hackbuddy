@@ -1,2 +1,5 @@
-# autodiscover-honeypot
-fun fun
+# HackBuddy
+
+check ou hackbuddy.io
+Hack with friends!
+
