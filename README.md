@@ -1,2 +1,2 @@
-# hackbuddy
-HACK WITH FRIENDS!
+# autodiscover-honeypot
+fun fun
