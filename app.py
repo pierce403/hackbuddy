@@ -20,7 +20,6 @@ from werkzeug.exceptions import Unauthorized
 
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Table, Column, Float, Integer, String, DateTime, MetaData, ForeignKey, func
-from dataclasses import dataclass # to serialize alchemy results
 
 app = Flask(__name__,static_url_path='/static')
 #sslify = SSLify(app)
@@ -124,4 +123,7 @@ def favicon():
 @app.route('/list')
 def dump():
   sesh_list = HackSesh.query.order_by(HackSesh.ctime.desc()).all()
-  return render_template("json.html",sessions=jsonify(sesh_list))
+  sesh_dict = []
+  for sesh in sesh_list:
+    sesh_dict.append(sesh.__dict__)
+  return render_template("json.html",sessions=sesh_list)
