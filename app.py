@@ -5,7 +5,7 @@ import time
 import flask
 import logging
 import sys
-from flask import Flask
+from flask import Flask, jsonify
 #from flask_sslify import SSLify
 import tweepy
 
@@ -124,4 +124,4 @@ def favicon():
 @app.route('/list')
 def dump():
   sesh_list = HackSesh.query.order_by(HackSesh.ctime.desc()).all()
-  return render_template("json.html",sessions=sesh_list)
+  return render_template("json.html",sessions=jsonify(sesh_list))
