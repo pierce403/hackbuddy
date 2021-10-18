@@ -42,6 +42,7 @@ class Sessions(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   url = db.Column(db.String(80))
   user = db.Column(db.String(80))
+  title = db.Column(db.String(80))
   ctime = db.Column(DateTime, default=func.now())
 
 class Users(db.Model):
