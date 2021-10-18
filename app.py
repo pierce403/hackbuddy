@@ -38,11 +38,12 @@ try:
 except:
   print('OOPS TWITTER BROKEN')
 
-class Sessions(db.Model):
+class HackSesh(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   url = db.Column(db.String(80))
   user = db.Column(db.String(80))
   description = db.Column(db.String(80))
+  tags = db.Column(db.String(80))
   ctime = db.Column(DateTime, default=func.now())
 
 class Users(db.Model):
@@ -106,11 +107,11 @@ def new():
   except:
     return "NOPE, LOGIN FIRST"
 
-  session = Sessions()
-  session.url = "potato"
-  session.user = username
-  session.description = request.values['description']
-  db.session.add(session)
+  sesh = HackSesh()
+  sesh.url = "potato"
+  sesh.user = username
+  sesh.description = request.values['description']
+  db.session.add(sesh)
   db.session.commit()  
   return "THANKS"
 
@@ -126,5 +127,5 @@ def favicon():
 
 @app.route('/list')
 def dump():
-  session_list = Sessions.query.order_by(Sessions.ctime.desc()).all()
-  return render_template("json.html",sessions=session_list)
+  sesh_list = HackSesh.query.order_by(HackSesh.ctime.desc()).all()
+  return render_template("json.html",sessions=sesh_list)
