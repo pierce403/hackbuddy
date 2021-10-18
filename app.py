@@ -110,10 +110,21 @@ def new():
   db.session.commit()  
   return "THANKS"
 
-@app.route('/view')
-def view():
-  return render_template('view.html')
-  #return render_template('templates/view.html',request.values['id'])
+@app.route('/host')
+def host():
+  try:
+    key = request.cookies.get('twitter_key')
+    secret = request.cookies.get('twitter_secret')
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+    auth.set_access_token(key, secret)
+    api = tweepy.API(auth)
+    username = api.verify_credentials().screen_name
+
+  except:
+    return "NOPE, LOGIN FIRST"
+
+  return render_template('host.html',username=username)
+
 
 @app.route('/favicon.ico')
 def favicon():
