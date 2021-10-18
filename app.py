@@ -5,6 +5,7 @@ import time
 import flask
 import logging
 import sys
+import json
 from flask import Flask, jsonify
 #from flask_sslify import SSLify
 import tweepy
@@ -38,7 +39,6 @@ try:
 except:
   print('OOPS TWITTER BROKEN')
 
-@dataclass
 class HackSesh(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   url = db.Column(db.String(80))
@@ -125,5 +125,11 @@ def dump():
   sesh_list = HackSesh.query.order_by(HackSesh.ctime.desc()).all()
   sesh_dict = []
   for sesh in sesh_list:
-    sesh_dict.append(sesh.__dict__)
-  return render_template("json.html",sessions=sesh_list)
+    rowdict={}
+    rowdict['url'] = sesh.url
+    rowdict['user'] = sesh.user
+    rowdict['description'] = sesh.description
+    sesh_dict.append(rowdict)
+
+  return render_template("json.html",sessions=sesh_dict)
+
