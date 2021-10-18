@@ -125,5 +125,5 @@ def favicon():
 
 @app.route('/list')
 def dump():
-  session_list = Sessions.query.order_by(Interesting.ctime.desc()).all()
-  return render_template("json.html",session_list)
+  session_list = Sessions.query.order_by(Sessions.ctime.desc()).all()
+  return render_template("json.html",sessions=session_list)
