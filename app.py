@@ -20,6 +20,7 @@ from werkzeug.exceptions import Unauthorized
 
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Table, Column, Float, Integer, String, DateTime, MetaData, ForeignKey, func
+from dataclasses import dataclass # to serialize alchemy results
 
 app = Flask(__name__,static_url_path='/static')
 #sslify = SSLify(app)
@@ -38,6 +39,7 @@ try:
 except:
   print('OOPS TWITTER BROKEN')
 
+@dataclass
 class HackSesh(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   url = db.Column(db.String(80))
@@ -45,12 +47,6 @@ class HackSesh(db.Model):
   description = db.Column(db.String(80))
   tags = db.Column(db.String(80))
   ctime = db.Column(DateTime, default=func.now())
-
-class Users(db.Model):
-  id = db.Column(db.Integer, primary_key=True)
-  username = db.Column(db.String(80))
-  last = db.Column(DateTime, default=func.now())  
-  ctime = db.Column(DateTime, default=func.now())  
 
 @app.before_first_request
 def setup():
