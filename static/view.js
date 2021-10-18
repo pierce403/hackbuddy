@@ -14,4 +14,4 @@ setInterval(function(){
   let num = api.getNumberOfParticipants();
   console.log("NUM USERS IN ROOM: "+num);
 
-}, 10000);//run this thang every 2 seconds
+}, 10000);//run this thang every 10 seconds
