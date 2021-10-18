@@ -105,7 +105,7 @@ def new():
   except:
     return "NOPE, LOGIN FIRST"
 
-  session = Session()
+  session = Sessions()
   session.url = "potato"
   session.user = username
   session.title = request.values['title']
