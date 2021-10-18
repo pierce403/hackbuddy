@@ -94,13 +94,24 @@ def twitter():
 
 @app.route('/new', methods=['POST'])
 def new():
+  try:
+    key = request.cookies.get('twitter_key')
+    secret = request.cookies.get('twitter_secret')
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+    auth.set_access_token(key, secret)
+    api = tweepy.API(auth)
+    username = api.verify_credentials().screen_name
+
+  except:
+    return "NOPE, LOGIN FIRST"
+
   session = Session()
   session.url = "potato"
-  session.user = "someone"
+  session.user = username
   session.title = request.values['title']
   db.session.add(session)
   db.session.commit()  
-  return "THANKS";
+  return "THANKS"
 
 @app.route('/view')
 def view():
