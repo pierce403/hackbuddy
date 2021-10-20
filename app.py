@@ -45,7 +45,9 @@ class HackSesh(db.Model):
   user = db.Column(db.String(80))
   description = db.Column(db.String(80))
   tags = db.Column(db.String(80))
-  ctime = db.Column(DateTime, default=func.now())
+  count = db.Column(db.Integer(), default = 1)
+
+  mtime = db.Column(DateTime, default=func.now())
 
 @app.before_first_request
 def setup():
@@ -109,6 +111,26 @@ def new():
   db.session.add(sesh)
   db.session.commit()  
   return "THANKS"
+
+@app.route('/update', methods=['POST'])
+def update():
+  try:
+    key = request.cookies.get('twitter_key')
+    secret = request.cookies.get('twitter_secret')
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+    auth.set_access_token(key, secret)
+    api = tweepy.API(auth)
+    username = api.verify_credentials().screen_name
+
+  except:
+    return "NOPE, LOGIN FIRST"
+
+  sesh = HackSesh.query.filter_by(username=username).first()
+  sesh.url = request.values['url']
+  sesh.description = request.values['description']
+  #db.session.add(sesh)
+  db.session.commit()  
+  return "GREAT"
 
 @app.route('/host')
 def host():

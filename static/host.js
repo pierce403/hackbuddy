@@ -2,7 +2,7 @@ console.log("LETS DO THIS");
 
 const domain = 'meet.jit.si';
 const options = {
-    roomName: 'ExploitWorkshop',
+    //roomName: 'ExploitWorkshop',
     //width: 700,
     //height: 700,
     parentNode: document.querySelector('#meet')
@@ -14,4 +14,15 @@ setInterval(function(){
   let num = api.getNumberOfParticipants();
   console.log("NUM USERS IN ROOM: "+num);
 
-}, 10000);//run this thang every 10 seconds
+  let desc = document.querySelector('#description')
+
+  let data = {description: desc,count: num};
+
+  fetch("/update", {
+  method: "POST", 
+  body: JSON.stringify(data)
+  }).then(res => {
+    console.log("Request complete! response:", res);
+  });
+
+}, 10000);//run every 10 seconds
