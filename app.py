@@ -48,6 +48,7 @@ class HackSesh(db.Model):
   count = db.Column(db.Integer(), default = 1)
 
   mtime = db.Column(DateTime, default=func.now())
+  ctime = db.Column(DateTime, default=func.now())
 
 @app.before_first_request
 def setup():
@@ -126,8 +127,9 @@ def update():
     return "NOPE, LOGIN FIRST"
 
   sesh = HackSesh.query.filter_by(username=username).first()
-  sesh.url = request.values['url']
-  sesh.description = request.values['description']
+  sesh.url = request.json['url']
+  sesh.description = request.json['description']
+  sesh.count = request.json['count']
   #db.session.add(sesh)
   db.session.commit()  
   return "GREAT"
