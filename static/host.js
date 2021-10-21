@@ -1,7 +1,7 @@
 console.log("LETS DO THIS");
 
 const domain = 'meet.jit.si';
-const roomname = Math.random().toString(36).substr(2, 12);
+const roomname = "hb-"+Math.random().toString(36).substr(2, 12);
 const options = {
     roomName: roomname,
     //width: 700,
