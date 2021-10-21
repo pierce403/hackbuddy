@@ -15,7 +15,7 @@ setInterval(function(){
   let num = api.getNumberOfParticipants();
   console.log("NUM USERS IN ROOM: "+num);
 
-  let desc = document.querySelector('#description')
+  let desc = document.querySelector('#description').value
 
   let data = {description: desc,count: num};
   data['roomName']=roomname;
