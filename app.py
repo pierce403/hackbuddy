@@ -41,8 +41,8 @@ except:
 
 class HackSesh(db.Model):
   id = db.Column(db.Integer, primary_key=True)
+  user = db.Column(db.String(80), unique=True)
   url = db.Column(db.String(80))
-  user = db.Column(db.String(80))
   description = db.Column(db.String(80))
   tags = db.Column(db.String(80))
   count = db.Column(db.Integer(), default = 1)
