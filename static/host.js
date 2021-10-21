@@ -21,7 +21,8 @@ setInterval(function(){
   data['roomName']=roomname;
 
   fetch("/update", {
-  method: "POST", 
+  method: "POST",
+  headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify(data)
   }).then(res => {
     console.log("Request complete! response:", res);
