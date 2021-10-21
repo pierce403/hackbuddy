@@ -20,10 +20,17 @@ function seshList()
    console.log(sesh.description);
    let row = seshTable.insertRow(-1);
 
-   row.insertCell().innerText = sesh.user;
+   row.insertCell().innerText = "@"+sesh.user;
    row.insertCell().innerText = sesh.description;
-   row.insertCell().innerText = sesh.url;
-   row.insertCell().innerText = sesh.count;
+   row.insertCell().innerText = "Active users: "+sesh.count;
+
+   let jitsiLink = document.createElement('a');
+   jitsiLink.setAttribute('href', sesh.url);
+   jitsiLink.setAttribute('target', "_blank");
+   jitsiLink.append("[JOIN]");
+   console.log(jitsiLink);
+   console.log(jitsiLink.innerHTML);
+   row.insertCell().appendChild(jitsiLink);
   }
 
   })
