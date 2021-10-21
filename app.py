@@ -125,7 +125,13 @@ def update():
   except:
     return "NOPE, LOGIN FIRST"
 
-  sesh = HackSesh.query.filter_by(user=username).first()
+  sesh = None
+  try:
+    sesh = HackSesh.query.filter_by(user=username).first()
+  except:
+    sesh = HackSesh()
+    sesh.user = username
+
   sesh.url = 'https://meet.jit.si/'+str(request.json['roomName'])
   sesh.description = request.json['description']
   sesh.count = request.json['count']
@@ -163,6 +169,7 @@ def dump():
     rowdict['url'] = sesh.url
     rowdict['user'] = sesh.user
     rowdict['description'] = sesh.description
+    rowdict['count'] = sesh.count
     sesh_dict.append(rowdict)
 
   return render_template("json.html",sessions=sesh_dict)

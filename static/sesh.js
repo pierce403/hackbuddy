@@ -23,6 +23,7 @@ function seshList()
    row.insertCell().innerText = sesh.user;
    row.insertCell().innerText = sesh.description;
    row.insertCell().innerText = sesh.url;
+   row.insertCell().innerText = sesh.count;
   }
 
   })
