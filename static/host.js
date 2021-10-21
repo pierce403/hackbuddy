@@ -1,8 +1,9 @@
 console.log("LETS DO THIS");
 
 const domain = 'meet.jit.si';
+const roomname = Math.random().toString(36).substr(2, 12);
 const options = {
-    //roomName: 'ExploitWorkshop',
+    roomName: roomname,
     //width: 700,
     //height: 700,
     parentNode: document.querySelector('#meet')
@@ -17,6 +18,7 @@ setInterval(function(){
   let desc = document.querySelector('#description')
 
   let data = {description: desc,count: num};
+  data['roomName']=roomname;
 
   fetch("/update", {
   method: "POST", 

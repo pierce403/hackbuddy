@@ -106,7 +106,6 @@ def new():
     return "NOPE, LOGIN FIRST"
 
   sesh = HackSesh()
-  sesh.url = "potato"
   sesh.user = username
   sesh.description = request.values['description']
   db.session.add(sesh)
@@ -127,7 +126,7 @@ def update():
     return "NOPE, LOGIN FIRST"
 
   sesh = HackSesh.query.filter_by(username=username).first()
-  sesh.url = request.json['url']
+  sesh.url = 'https://meet.jit.si/'+str(request.json['roomName'])
   sesh.description = request.json['description']
   sesh.count = request.json['count']
   #db.session.add(sesh)
