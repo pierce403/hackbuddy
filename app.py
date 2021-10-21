@@ -92,26 +92,6 @@ def twitter():
   response.set_cookie('twitter_secret', value = access[1], httponly = True)
   return response
 
-@app.route('/new', methods=['POST'])
-def new():
-  try:
-    key = request.cookies.get('twitter_key')
-    secret = request.cookies.get('twitter_secret')
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(key, secret)
-    api = tweepy.API(auth)
-    username = api.verify_credentials().screen_name
-
-  except:
-    return "NOPE, LOGIN FIRST"
-
-  sesh = HackSesh()
-  sesh.user = username
-  sesh.description = request.values['description']
-  db.session.add(sesh)
-  db.session.commit()  
-  return "THANKS"
-
 @app.route('/update', methods=['POST'])
 def update():
   try:
