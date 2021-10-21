@@ -152,7 +152,7 @@ def host():
   except:
     return "NOPE, LOGIN FIRST"
 
-  return render_template('host.html',username=username)
+  return render_template('host.html',desc=request.values['desc'])
 
 
 @app.route('/favicon.ico')

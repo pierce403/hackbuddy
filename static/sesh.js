@@ -20,7 +20,7 @@ function seshList()
    console.log(sesh.description);
    let row = seshTable.insertRow(-1);
 
-   row.insertCell().innerText = sesh.user;
+   //row.insertCell().innerText = sesh.user;
    row.insertCell().innerText = sesh.description;
    row.insertCell().innerText = sesh.url;
    row.insertCell().innerText = sesh.count;
