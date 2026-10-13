@@ -1,4 +1,14 @@
 import {test} from 'node:test';import assert from 'node:assert/strict';import {execFileSync} from 'node:child_process';import {Miniflare,convertV4MiniflareOptions} from 'miniflare';import {authorization} from '../worker/oauth.mjs';
+import {storageFailure} from '../worker/storage.mjs';
+test('storage diagnostics discard connection strings, credentials and arbitrary error fields',()=>{
+ const secret='postgres://private-user:private-password@private.example/private';
+ for(const code of ['ETIMEDOUT',secret,undefined]){
+  const result=storageFailure({code,message:secret,detail:secret,stack:secret},'connect');
+  assert.deepEqual(result,{event:'hackbuddy_storage_unavailable',phase:'connect',code:code==='ETIMEDOUT'?'ETIMEDOUT':'UNCLASSIFIED'});
+  assert.ok(!JSON.stringify(result).includes(secret));
+ }
+ assert.equal(storageFailure({code:'42P01'},'query').phase,'query');
+});
 test('OAuth matches the published OAuth Core 1.0a signature vector',()=>{
  const url='http://photos.example.net/photos?file=vacation.jpg&size=original';const header=authorization('GET',url,'dpf43f3p2l4k3l03','kd94hf93k423kf44','nnch734d00sl2jdk','pfkkdhi9sl3r4s00',{}, {nonce:'kllo9940pd9333jh',timestamp:1191242096});assert.match(header,/oauth_signature="tR3%2BTy81lMeYAr%2FFid0kMTYa%2FWM%3D"/);
 });

@@ -11,6 +11,8 @@ empty database is created automatically. Source connection timeouts mean histori
 records are unrecovered, not absent. Database failures return explicit503 responses.
 Keep both source configuration and slug for recovery, and hold writes until storage
 and its backups are verified. Staging uses independent synthetic D1 data only.
+Runtime storage diagnostics record only the connection/query phase and an allowlisted
+error code. Connection strings, arbitrary error messages and user records are excluded.
 
 OAuth1 requests are signed at request time, with the original Twitter app identity.
 The callback is bound to an encrypted, expiring request-token cookie, fixing the
