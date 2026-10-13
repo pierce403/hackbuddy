@@ -23,7 +23,10 @@ has yet been verified. READ_ONLY blocks updates and login/callback side effects.
 
 Native main builds run npm ci, npm run build and npx wrangler deploy --env "".
 The original source commit branch remains recovery source. Previews remain disabled and
-Cloudflare credentials stay in Cloudflare. Current hosting cutover is pending.
+Cloudflare credentials stay in Cloudflare. Hosting now serves hackbuddy.io through its exact ordinary Worker route.
+Original DNS target and source are retained; Heroku web is stopped. Production
+writes remain paused after automatic approval review requested a separate owner
+write-activation grant. Fresh D1 reads and custom-host HTTPS/browser are verified.
 
 Driver guidance: https://developers.cloudflare.com/workers/tutorials/postgres/
 OAuth signature vector: https://oauth.net/core/1.0a/#rfc.section.A.5.2
