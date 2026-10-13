@@ -42,5 +42,13 @@
         }
       ]
     }
-  }
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "hackbuddy-production",
+      "database_id": "b40bdd2e-f905-48a8-8355-d6bec290e292",
+      "migrations_dir": "migrations"
+    }
+  ]
 }

@@ -6,15 +6,13 @@ parameterized upsert, repairing the original missing-row/add bug. List ordering
 retains descending creation time and adds stable ID tie ordering. HTML descriptions
 are escaped; JSON keeps url, user, description and count fields.
 
-Production retains the existing DATABASE_URL2 PostgreSQL identity. No schema or
-empty database is created automatically. Source connection timeouts mean historical
-records are unrecovered, not absent. Database failures return explicit503 responses.
-Keep both source configuration and slug for recovery, and hold writes until storage
-and its backups are verified. Staging uses independent synthetic D1 data only.
-The read-only notice appears inside valid homepage HTML. An unavailable list shows an
-explicit recovery message instead of an unhandled browser error.
-Runtime storage diagnostics record only the connection/query phase and an allowlisted
-error code. Connection strings, arbitrary error messages and user records are excluded.
+On 2026-10-13 the owner explicitly waived historical backups/data carryover because
+this site never launched. Production starts with a fresh D1 hack_sesh table and
+retains the existing fields, ordering and atomic upsert. The inaccessible legacy
+PostgreSQL source remains untouched. DATABASE_URL2 remains an unused runtime
+recovery credential; active code no longer connects to it. Staging uses its separate
+synthetic D1 database. The homepage shows read-only notices and handles failed reads
+without exposing records or arbitrary error messages.
 
 OAuth1 requests are signed at request time, with the original Twitter app identity.
 The callback is bound to an encrypted, expiring request-token cookie, fixing the
