@@ -1,6 +1,6 @@
 # Hackbuddy migration
 
-Preserve original master 3f4ca924b8133648ed986794996c488d5e07d1fc, deployed slug
+Preserve original source commit 3f4ca924b8133648ed986794996c488d5e07d1fc, deployed slug
 and external DATABASE_URL2. Its connection timeout is not evidence of empty data.
 Production queries the same PostgreSQL table with encrypted transport, bounded
 queries and parameterized writes. Never create an empty production replacement.

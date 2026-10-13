@@ -20,7 +20,7 @@ stable runtime secret for the pending login cookie. No real Twitter interaction
 has yet been verified. READ_ONLY blocks updates and login/callback side effects.
 
 Native main builds run npm ci, npm run build and npx wrangler deploy --env "".
-The original master branch remains recovery source. Previews remain disabled and
+The original source commit branch remains recovery source. Previews remain disabled and
 Cloudflare credentials stay in Cloudflare. Current hosting cutover is pending.
 
 Driver guidance: https://developers.cloudflare.com/workers/tutorials/postgres/
