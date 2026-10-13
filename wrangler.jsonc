@@ -33,7 +33,14 @@
         "READ_ONLY": "false",
         "STAGING": "true",
         "AUTH_DOMAIN": "hackbuddy-io-staging.bcrt43.workers.dev"
-      }
+      },
+      "d1_databases": [
+        {
+          "binding": "STAGING_DB",
+          "database_name": "hackbuddy-staging",
+          "database_id": "a7c6b001-fe06-4890-8c2a-cdef4292a515"
+        }
+      ]
     }
   }
 }
